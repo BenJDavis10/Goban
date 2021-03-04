@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Goban.src {
-    class SpaceSet : IPositionSet {
-        public PositionType Type { get; } = PositionType.Empty;
-        private ISet<Position> aPositions = new HashSet<Position>();
+    class SpaceSet : PositionSet {
+        public new PositionType Type {
+            get {
+                return PositionType.Empty;
 
-        public SpaceSet(ISet<Position> pPositions) {
-            aPositions.UnionWith(pPositions);
-
+            }
         }
 
-        public bool CanCapture(IPositionSet pTarget) {
+
+        public override bool CanCapture(IPositionSet pTarget) {
             return false;
 
         }

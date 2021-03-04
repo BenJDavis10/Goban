@@ -9,6 +9,12 @@ namespace Goban.src {
         /// </summary>
         public PositionType Type { get; }
 
+        public void Add(Position pPos);
+
+        public void Remove(Position pPos);
+
+        public bool Contains(Position pPos);
+
         public bool CanCapture(IPositionSet pTarget);
 
     }

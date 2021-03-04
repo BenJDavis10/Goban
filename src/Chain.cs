@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Goban.src {
-    class Chain : IPositionSet {
-        public PositionType Type { get; }
-        private ISet<Position> aPositions = new HashSet<Position>();
+    class Chain : PositionSet {
+        public new PositionType Type { get; }
 
 
         /// <summary>
@@ -13,31 +13,14 @@ namespace Goban.src {
         /// </summary>
         /// <param name="pType">The type of chain to create</param>
         public Chain(PositionType pType) {
+            Debug.Assert(pType == PositionType.Black || pType == PositionType.White);   // Type must be a stone colour
+
             Type = pType;
 
         }
 
 
-        /// <summary>
-        /// Creates a new chain from the chains given
-        /// </summary>
-        /// <param name="pChains">The chains to unify with</param>
-        public Chain(params Chain[] pChains) {
-            Type = pChains[0].Type;
-
-            foreach (var chain in pChains) {
-                if (chain.Type != Type) {
-                    throw new InvalidOperationException("Cannot unify chains of different type");
-
-                }
-
-                aPositions.UnionWith(chain.aPositions);
-
-            }
-        }
-
-
-        public bool CanCapture(IPositionSet pTarget) {
+        public override bool CanCapture(IPositionSet pTarget) {
             return pTarget.Type != Type;
 
         }
@@ -48,7 +31,7 @@ namespace Goban.src {
         /// </summary>
         /// <param name="pOther">The chain to unify with</param>
         public void UnionWith(Chain pOther) {
-            aPositions.UnionWith(pOther.aPositions);
+            base.AddAll(pOther.Positions);
 
         }
 
@@ -60,8 +43,8 @@ namespace Goban.src {
         public HashSet<IPositionSet> GetLiberties() {
             var liberties = new HashSet<IPositionSet>();
 
-            foreach (var pos in aPositions) {
-                liberties.UnionWith(pos.GetLiberties());
+            foreach (var pos in Positions) {
+                liberties.UnionWith(pos.GetAdjacent());
 
             }
 

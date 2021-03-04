@@ -3,18 +3,27 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Goban.src {
-    class BorderSet : IPositionSet {
-        public PositionType Type { get; }
-        private ISet<Position> aPositions = new HashSet<Position>();
+    class BorderSet : PositionSet {
+        public new PositionType Type { 
+            get {
+                return PositionType.Border;
+            }   
+        }
 
 
-        public BorderSet(ISet<Position> pPositions) {
-            aPositions.UnionWith(pPositions);
+        public new void Add(Position pPos) {
+            throw new InvalidOperationException("Cannot modify Border Set after creation");
 
         }
 
 
-        public bool CanCapture(IPositionSet pTarget) {
+        public new void Remove(Position pPos) {
+            throw new InvalidOperationException("Cannot modify Border Set after creation");
+
+        }
+
+
+        public override bool CanCapture(IPositionSet pTarget) {
             return true;
 
         }

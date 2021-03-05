@@ -5,13 +5,17 @@ using System.Text;
 
 namespace Goban.src {
     class Position {
-        public static readonly int[][] neighbours = new int[][] { new int[]{-1, 0}, 
+        /// <summary> Constant containing valid relative (x, y) coordinates for positions to be considered adjacent </summary>
+        public static readonly int[][] adjCoords = new int[][] { new int[]{-1, 0}, 
                                                                     new int[]{0, -1}, 
                                                                     new int[]{1, 0}, 
-                                                                    new int[]{0, 1} };     // Constant representing liberties' relative coordinates
-        public int x { get; }       // x, y coords
+                                                                    new int[]{0, 1} };
+        /// <summary> x-coord </summary>
+        public int x { get; }
+        /// <summary> y-coord </summary>
         public int y { get; }
-        private Board aBoard;       // Board this position belongs to
+        /// <summary> The board this position belongs to </summary>
+        private Board aBoard;
 
         
         /// <summary>
@@ -37,7 +41,7 @@ namespace Goban.src {
         public HashSet<IPositionSet> GetAdjacent() {
             var adj = new HashSet<IPositionSet>();
 
-            foreach (var dPos in neighbours) {
+            foreach (var dPos in adjCoords) {
                 var pos = aBoard.GetPosition(x + dPos[0], y + dPos[1]);
 
                 if (pos != null) {

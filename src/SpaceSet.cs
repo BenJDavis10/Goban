@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Goban.src {
+
+    /// <summary>
+    /// Represents a set of empty positions
+    /// </summary>
     class SpaceSet : PositionSet {
-        public new PositionType Type {
+        public override PositionType Type {
             get {
                 return PositionType.Empty;
 

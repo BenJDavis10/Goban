@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Goban.src {
+    /// <summary>
+    /// Represents a set of positions with shared properties
+    /// </summary>
     abstract class PositionSet : IPositionSet {
+        /// <summary> The positions contained in this set </summary>
         private ISet<Position> aPositions = new HashSet<Position>();
-        public PositionType Type { get; }
+        /// <summary> The type of positions this set contains </summary>
+        public abstract PositionType Type { get; }
 
-
+        /// <summary> The positions contained in this set </summary>
         public ISet<Position> Positions {
             get {
                 var newSet = new HashSet<Position>();

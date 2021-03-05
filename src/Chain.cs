@@ -4,8 +4,12 @@ using System.Diagnostics;
 using System.Text;
 
 namespace Goban.src {
+
+    /// <summary>
+    /// Represents a set of positions occupied by stones of the same colour
+    /// </summary>
     class Chain : PositionSet {
-        public new PositionType Type { get; }
+        public override PositionType Type { get; }
 
 
         /// <summary>
@@ -29,8 +33,9 @@ namespace Goban.src {
         /// <summary>
         /// Unifies this chain with the chain given
         /// </summary>
-        /// <param name="pOther">The chain to unify with</param>
+        /// <param name="pOther">The chain to unify with (must be of the same colour)</param>
         public void UnionWith(Chain pOther) {
+            Debug.Assert(pOther.Type == Type);
             base.AddAll(pOther.Positions);
 
         }
@@ -40,7 +45,7 @@ namespace Goban.src {
         /// Finds the set of position sets in the chain's liberties
         /// </summary>
         /// <returns>The set of neighbouring position sets</returns>
-        public HashSet<IPositionSet> GetLiberties() {
+        public ISet<IPositionSet> GetLiberties() {
             var liberties = new HashSet<IPositionSet>();
 
             foreach (var pos in Positions) {

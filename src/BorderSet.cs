@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Goban.src {
+    /// <summary>
+    /// Represents the set of positions along the border (not part of playable area of board)
+    /// </summary>
     class BorderSet : PositionSet {
-        public new PositionType Type { 
+        public override PositionType Type { 
             get {
                 return PositionType.Border;
             }   

@@ -9,17 +9,11 @@ namespace Goban.src {
     /// Represents a Go board (Goban)
     /// </summary>
     class Board {
-        /// <summary>
-        /// Positions on the board
-        /// </summary>
+        /// <summary> Positions on the board </summary>
         private readonly Position[,] aPositions;
-        /// <summary>
-        /// Position sets on the board
-        /// </summary>
+        /// <summary> Position sets on the board </summary>
         private readonly ISet<IPositionSet> aPositionSets = new HashSet<IPositionSet>();
-        /// <summary>
-        /// Dimensions of the playable area of the board
-        /// </summary>
+        /// <summary> Dimensions of the playable area of the board </summary>
         public int Size { get; }
 
 
